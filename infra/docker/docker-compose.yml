@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: services/spring-boot-template/Dockerfile
+    container_name: foundation-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - foundation-network
+
+  postgres:
+    image: postgres:15
+    container_name: foundation-postgres
+    environment:
+      POSTGRES_DB: foundation
+      POSTGRES_USER: foundation
+      POSTGRES_PASSWORD: foundation
+    ports:
+      - "5455:5432"
+    networks:
+      - foundation-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: foundation-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - foundation-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: foundation-prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - foundation-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: foundation-grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - foundation-network
+
+networks:
+  foundation-network:
+    driver: bridge
