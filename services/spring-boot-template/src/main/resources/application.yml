@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-boot-template
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+
+info:
+  app:
+    name: Spring Boot Enterprise Template
+    version: 0.0.2
+    description: Enterprise foundation service
