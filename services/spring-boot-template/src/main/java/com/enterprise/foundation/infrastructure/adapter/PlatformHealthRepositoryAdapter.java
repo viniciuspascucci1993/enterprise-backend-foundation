@@ -7,6 +7,7 @@ import com.enterprise.foundation.infrastructure.persistence.repository.JpaPlatfo
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -46,5 +47,17 @@ public class PlatformHealthRepositoryAdapter implements PlatformHealthRepository
                         e.getCreatedAt()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<PlatformHealthApp> findByServiceName(String serviceName) {
+        return jpaPlatformHealthRepository
+                .findByServiceName(serviceName)
+                .map(entity -> new PlatformHealthApp(
+                        entity.getId(),
+                        entity.getServiceName(),
+                        entity.getStatus(),
+                        entity.getCreatedAt()
+                ));
     }
 }

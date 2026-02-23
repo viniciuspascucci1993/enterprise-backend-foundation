@@ -8,6 +8,7 @@ import io.micrometer.core.instrument.Timer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlatformHealthUseCase {
@@ -56,5 +57,20 @@ public class PlatformHealthUseCase {
 
             return result;
         });
+    }
+
+    public PlatformHealthApp updateStatus(String serviceName, String status) {
+
+        Optional<PlatformHealthApp> existing =
+                platformHealthRepositoryPort.findByServiceName(serviceName);
+
+        if (existing.isPresent()) {
+            PlatformHealthApp app = existing.get();
+            app.setStatus(status);
+            return platformHealthRepositoryPort.save(app);
+        }
+
+        return platformHealthRepositoryPort
+                .save(new PlatformHealthApp(serviceName, status));
     }
 }

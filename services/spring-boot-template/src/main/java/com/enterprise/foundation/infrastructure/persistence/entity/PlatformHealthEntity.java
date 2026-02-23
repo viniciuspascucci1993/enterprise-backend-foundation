@@ -12,7 +12,7 @@ public class PlatformHealthEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "SERVICE_NAME_APP")
+    @Column(name = "SERVICE_NAME_APP", unique = true)
     private String serviceName;
     private String status;
 
