@@ -11,10 +11,10 @@ public class InfoConfig {
 
     @Bean
     public InfoContributor platformInfoContributor() {
-        return builder -> builder.withDetail("platform",
+        return builder -> builder.withDetail("InfoConfig",
                 Map.of(
                         "name", "Enterprise Backend Foundation",
-                        "version", "0.0.2",
+                        "version", "0.0.3",
                         "environment", "local"
                 )
         );
