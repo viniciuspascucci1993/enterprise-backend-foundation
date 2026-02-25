@@ -7,7 +7,7 @@
 
     <groupId>com.enterprise.foundation</groupId>
     <artifactId>enterprise-backend-foundation</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 	
 	<parent>
@@ -32,6 +32,7 @@
     <!-- Modules -->
     <modules>
         <module>services/spring-boot-template</module>
+		<module>services/notification-service-app</module>
     </modules>
 
 </project>
